@@ -53,7 +53,7 @@ def index():
 #Mail route, sending mail to all recipients from table recipients
 @application.route("/sendmail", methods=['GET'])
 def send_mail() :
-        db = MySQLdb.connect("localhost", "root", "daserik20", "students")
+        db = MySQLdb.connect(host, username, password, database)
         curs = db.cursor()
         # mail = Mail(application)
         # curs.execute("SELECT * FROM recipients;")
@@ -92,7 +92,7 @@ def upload():
 #Route for getting new recipient, basic checks if login already in the table, checking for any errors with mysql
 @application.route('/insertrecipient', methods=['GET'])
 def insertrecipient():
-        db = MySQLdb.connect("localhost", "root", "daserik20", "students")
+        db = MySQLdb.connect(host, username, password, database)
         curs = db.cursor()
         input=request.args['input']
         print "input = ", input
@@ -128,7 +128,7 @@ def insertrecipient():
 #Route for deliting recipient
 @application.route('/deleterecipient', methods=['GET'])
 def deleterecipient():
-        db = MySQLdb.connect("localhost", "root", "daserik20", "students")
+        db = MySQLdb.connect(host, username, password, database)
         curs = db.cursor()
         input=request.args['input']
         print input
@@ -170,7 +170,7 @@ def changerecipient():
 
 @application.route('/getrecipients', methods=['GET'])
 def getrecipients():
-        db = MySQLdb.connect("localhost", "root", "daserik20", "students")
+        db = MySQLdb.connect(host, username, password, database)
         curs = db.cursor()
         try :
                 print "here"
@@ -190,7 +190,7 @@ def getrecipients():
 
 @application.route('/autocomplete', methods=['GET'])
 def autocomplete():
-        db = MySQLdb.connect("localhost", "root", "daserik20", "students")
+        db = MySQLdb.connect(host, username, password, database)
         curs = db.cursor()
         input=request.args['input']
         print input
