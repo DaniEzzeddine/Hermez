@@ -26,8 +26,8 @@ application.config.update(
 	MAIL_SERVER='smtp.gmail.com',
 	MAIL_PORT=465,
 	MAIL_USE_SSL=True,
-	MAIL_USERNAME = 'dani.izzedin@gmail.com',
-	MAIL_PASSWORD = 'danik200'
+	MAIL_USERNAME = os.getenv('mail_username'),
+	MAIL_PASSWORD = os.getenv('mail_password')
 	)
 
 
@@ -53,7 +53,7 @@ def index():
 #Mail route, sending mail to all recipients from table recipients
 @application.route("/sendmail", methods=['GET'])
 def send_mail() :
-        db = MySQLdb.connect(host, username, password, database)
+        db = MySQLdb.connect(os.getenv('mysql_host'), os.getenv('mysql_username'), os.getenv('mysql_password'), os.getenv('mysql_database'))
         curs = db.cursor()
         # mail = Mail(application)
         # curs.execute("SELECT * FROM recipients;")
@@ -92,7 +92,7 @@ def upload():
 #Route for getting new recipient, basic checks if login already in the table, checking for any errors with mysql
 @application.route('/insertrecipient', methods=['GET'])
 def insertrecipient():
-        db = MySQLdb.connect(host, username, password, database)
+        db = MySQLdb.connect(os.getenv('mysql_host'), os.getenv('mysql_username'), os.getenv('mysql_password'), os.getenv('mysql_database'))
         curs = db.cursor()
         input=request.args['input']
         print "input = ", input
@@ -128,7 +128,7 @@ def insertrecipient():
 #Route for deliting recipient
 @application.route('/deleterecipient', methods=['GET'])
 def deleterecipient():
-        db = MySQLdb.connect(host, username, password, database)
+        db = MySQLdb.connect(os.getenv('mysql_host'), os.getenv('mysql_username'), os.getenv('mysql_password'), os.getenv('mysql_database'))
         curs = db.cursor()
         input=request.args['input']
         print input
@@ -148,7 +148,7 @@ def deleterecipient():
 #changing intraname of the recipient
 @application.route('/changerecipient', methods=['GET'])
 def changerecipient():
-        db = MySQLdb.connect("localhost", "root", "daserik20", "students")
+        db = MySQLdb.connect(os.getenv('mysql_host'), os.getenv('mysql_username'), os.getenv('mysql_password'), os.getenv('mysql_database'))
         curs = db.cursor()
         old_name=request.args['old_value']
         new_name=request.args['new_value']
@@ -170,7 +170,7 @@ def changerecipient():
 
 @application.route('/getrecipients', methods=['GET'])
 def getrecipients():
-        db = MySQLdb.connect(host, username, password, database)
+        db = MySQLdb.connect(os.getenv('mysql_host'), os.getenv('mysql_username'), os.getenv('mysql_password'), os.getenv('mysql_database'))
         curs = db.cursor()
         try :
                 print "here"
@@ -190,7 +190,7 @@ def getrecipients():
 
 @application.route('/autocomplete', methods=['GET'])
 def autocomplete():
-        db = MySQLdb.connect(host, username, password, database)
+        db = MySQLdb.connect(os.getenv('mysql_host'), os.getenv('mysql_username'), os.getenv('mysql_password'), os.getenv('mysql_database'))
         curs = db.cursor()
         input=request.args['input']
         print input
