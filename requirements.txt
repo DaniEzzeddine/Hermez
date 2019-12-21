@@ -54,6 +54,6 @@ uWSGI==2.0.17.1
 virtualenv==16.0.0
 virtualenv-clone==0.4.0
 virtualenvwrapper==4.8.2
-waitress==1.1.0
+waitress==1.4.0
 Werkzeug==0.14.1
 wrapt==1.10.11
